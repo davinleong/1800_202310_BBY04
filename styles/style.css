@@ -1,1 +1,25 @@
+.bg-info {
+  background-color: #1B98E0 !important;     /* some secondary colour */
+}
 
+.navbar-light .navbar-brand {
+  color: #1B98E0;                           /* contrast to secondary colour */
+}
+
+.btn-primary {
+  color: #000000;                           /* contrast to secondary colour */
+  font-size: 150%;
+  background-color: #1B98E0;                /* some secondary colour */
+  border-color: #1B98E0;                    /* some accent colour */
+  border-width: thick
+}
+
+body {
+  background-color: #E8F1F2;                /* some primary colour */
+}
+
+/* this is the new font for my logo navbar brand */
+.navbar-brand{
+  font-family: ' Impact ', cursive;
+  font-size: 2.25rem;
+}
