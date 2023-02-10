@@ -22,6 +22,26 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
+
+    <style>
+      body {
+        display:grid;
+              height:100vh;
+              width:100vw;
+              grid-template-columns: 1fr;
+              grid-template-rows: 10% 80% 10%;
+              grid-template-areas: 
+                  "nav"
+                  "container py-4"
+                  "footer";
+      }
+      a:visited {
+        color:aquamarine;
+      }
+      a:active {
+        color:aquamarine;
+      }
+    </style>
   </head>
 
   <body>
@@ -105,6 +125,15 @@
       </div>
     </div>
 
+    <footer>
+      <div class="p-4 bg-primary"> 
+        <p class="fs-4">
+          <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="hi"> About us | </a>
+          <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="hi"> Social Media | </a>
+          <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="hi"> Feedback | </a>       
+        </p>
+      </div>
+    </footer>
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
