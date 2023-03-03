@@ -8,16 +8,10 @@ a {
 }
 
 .navbar-light .navbar-brand {
-  color: #1B98E0;                           /* contrast to secondary colour */
-}
-
-.btn-primary {
-  color: #000000;                           /* contrast to secondary colour */
-  font-size: 150%;
   background-color: #1B98E0;                /* some secondary colour */
   border-color: #1B98E0;                    /* some accent colour */
   border-width: thick
-  
+
 }
 
 body {
@@ -31,18 +25,6 @@ body {
       "nav"
       "container py-4"
       "footer";
-}
-
-nav {
-  grid-area: nav;
-}
-
-.container py-4 {
-  grid-area: container py-4;
-}
-
-footer {
-  grid-area: footer;
 }
 
 /* this is the new font for my logo navbar brand */
