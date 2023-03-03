@@ -24,6 +24,13 @@ app.get("/home", function (req, res) {
   res.send(doc);
 });
 
+app.get("/login", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/login.html", "utf8");
+  res.send(doc);
+});
+
 // for resource not found (i.e., 404)
 app.use(function (req, res, next) {
   // this could be a separate file too - but you'd have to make sure that you have the path

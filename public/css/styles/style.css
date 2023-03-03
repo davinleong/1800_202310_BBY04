@@ -1,5 +1,10 @@
+
+a {
+  color:#000000;
+ }
+
 .bg-info {
-  background-color: #1B98E0 !important;     /* some secondary colour */
+  background-color: #1B98E0;     /* some secondary colour */
 }
 
 .navbar-light .navbar-brand {
@@ -12,14 +17,31 @@
   background-color: #1B98E0;                /* some secondary colour */
   border-color: #1B98E0;                    /* some accent colour */
   border-width: thick
+  
 }
 
 body {
   background-color: #E8F1F2;                /* some primary colour */
+  display:grid;
+  height:100vh;
+  width:100vw;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 80% 10%;
+  grid-template-areas: 
+      "nav"
+      "container py-4"
+      "footer";
 }
 
 /* this is the new font for my logo navbar brand */
 .navbar-brand{
   font-family: ' Impact ', cursive;
   font-size: 2.25rem;
+}
+
+a:visited {
+  color:aquamarine;
+}
+a:active {
+  color:aquamarine;
 }
