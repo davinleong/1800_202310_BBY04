@@ -33,6 +33,18 @@ body {
       "footer";
 }
 
+nav {
+  grid-area: nav;
+}
+
+.container py-4 {
+  grid-area: container py-4;
+}
+
+footer {
+  grid-area: footer;
+}
+
 /* this is the new font for my logo navbar brand */
 .navbar-brand{
   font-family: ' Impact ', cursive;
