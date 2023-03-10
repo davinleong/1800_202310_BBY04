@@ -66,8 +66,30 @@
 
   <!-- Stuff -->
   <div class="container py-4">
-    
+    <div class="container-fluid bg-light">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="button">
+          Search
+        </button>
+    </div>
   </div>
+
+  <template id="busLineTemplate">
+        <div class="bus py-2 mx-2" style="width: 18rem">
+            <img class="bus-image bus-img-top" src=" ..." alt="..." />
+            <div class="bus-body">
+                <h5 class="bus-title">Card title</h5>
+                <p class="bus-length">placeholder</p>
+                <br />
+                <p class="bus-text">
+                    Some quick example text to build on the bus line and make up the
+                    bulk of the bus line's content.
+                </p>
+                <a class="btn btn-primary bus-href">Read more ...</a>
+            </div>
+        </div>
+  </template>
 
   <!-- Footer -->
   <footer>
@@ -101,6 +123,7 @@
 
   <!-- Link to scripts of your own -->
   <script src="./js/script.js"></script>
+  <script src="./js/search.js"></script>
 </body>
 
 </html>
