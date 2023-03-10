@@ -9,6 +9,8 @@ const fs = require("fs");
 app.use("/js", express.static("./public/js"));
 app.use("/css", express.static("./public/css"));
 app.use("/images", express.static("./public/images"));
+app.use("/text", express.static("./public/text"));
+
 
 app.get("/", function (req, res) {
   //console.log(process.env);
@@ -37,6 +39,29 @@ app.get("/search", function (req, res) {
   let doc = fs.readFileSync("./app/html/search.html", "utf8");
   res.send(doc);
 });
+
+app.get("/prelogin", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/text/nav_before_login.html", "utf8");
+  res.send(doc);
+});
+
+app.get("/postlogin", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/text/nav_after_login.html", "utf8");
+  res.send(doc);
+});
+
+app.get("/footer", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/text/footer.html", "utf8");
+  res.send(doc);
+});
+
+
 
 // for resource not found (i.e., 404)
 app.use(function (req, res, next) {
