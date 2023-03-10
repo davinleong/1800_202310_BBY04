@@ -50,3 +50,7 @@ a:active {
 .dropdown-item {
   color:aquamarine;
 }
+
+.bus-body {
+  border-radius:10px;
+}
