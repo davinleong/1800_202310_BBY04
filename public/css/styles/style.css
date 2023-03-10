@@ -46,3 +46,8 @@ a:visited {
 a:active {
   color:aquamarine;
 }
+
+.responsive {
+  width: 100%;
+  height: auto;
+}

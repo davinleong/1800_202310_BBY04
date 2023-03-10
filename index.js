@@ -26,6 +26,13 @@ app.get("/home", function (req, res) {
   res.send(doc);
 });
 
+app.get("/eachBus", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/eachBus.html", "utf8");
+  res.send(doc);
+});
+
 app.get("/login", function (req, res) {
   //console.log(process.env);
   // retrieve and send an HTML document from the file system
