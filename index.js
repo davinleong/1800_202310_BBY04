@@ -61,7 +61,12 @@ app.get("/footer", function (req, res) {
   res.send(doc);
 });
 
-
+app.get("/eachStop", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/eachStop.html", "utf8");
+  res.send(doc);
+});
 
 // for resource not found (i.e., 404)
 app.use(function (req, res, next) {
