@@ -46,3 +46,8 @@ a:visited {
 a:active {
   color:aquamarine;
 }
+
+#home_icon {
+  max-width: 50px;
+  max-height: 50px;
+}
