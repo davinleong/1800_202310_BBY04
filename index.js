@@ -47,6 +47,27 @@ app.get("/search", function (req, res) {
   res.send(doc);
 });
 
+app.get("/friends", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/friends.html", "utf8");
+  res.send(doc);
+});
+
+app.get("/pets", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/pets.html", "utf8");
+  res.send(doc);
+});
+
+app.get("/camera", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/camera.html", "utf8");
+  res.send(doc);
+});
+
 app.get("/prelogin", function (req, res) {
   //console.log(process.env);
   // retrieve and send an HTML document from the file system
@@ -68,7 +89,12 @@ app.get("/footer", function (req, res) {
   res.send(doc);
 });
 
-
+app.get("/eachStop", function (req, res) {
+  //console.log(process.env);
+  // retrieve and send an HTML document from the file system
+  let doc = fs.readFileSync("./app/html/eachStop.html", "utf8");
+  res.send(doc);
+});
 
 // for resource not found (i.e., 404)
 app.use(function (req, res, next) {

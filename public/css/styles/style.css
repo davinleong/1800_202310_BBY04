@@ -47,7 +47,10 @@ a:active {
   color:aquamarine;
 }
 
-.responsive {
-  width: 100%;
-  height: auto;
+.dropdown-item {
+  color:aquamarine;
+}
+
+.bus-body {
+  border-radius:10px;
 }
