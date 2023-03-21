@@ -38,11 +38,13 @@ function showMap() {
             // img = doc.data().posterurl; // Image
             // url = doc.data().link; // URL
 
+            localStorage.setItem("docID", doc.id);
+
             // Pushes information into the features array
             features.push({
               'type': 'Feature',
               'properties': {
-                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/eachStop.html?id=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
+                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/eachStop" target="_blank" title="Opens in a new window">Read more</a>`
               },
               'geometry': {
                 'type': 'Point',

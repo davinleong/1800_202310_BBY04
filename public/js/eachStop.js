@@ -1,8 +1,11 @@
 function displayBusStopInformation() {
   //retrieve the document id from the url
-  let params = new URL(window.location.href) //get the url from the searbar
-  let ID = params.searchParams.get("docID");
-  console.log(ID);
+  // let params = new URL(window.location.href) //get the url from the searbar
+  // let ID = params.searchParams.get("docID");
+  // console.log(ID);
+
+  var ID = localStorage.getItem("docID");
+  alert(ID);
 
   db.collection("busStop").doc(ID).get().then(thisBusStop => {
     busStopInfo = thisBusStop.data();
