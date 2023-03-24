@@ -69,14 +69,14 @@ app.get("/camera", function (req, res) {
 });
 
 app.get("/prelogin", function (req, res) {
-  //console.log(process.env);
+  console.log(process.env);
   // retrieve and send an HTML document from the file system
   let doc = fs.readFileSync("./app/text/nav_before_login.html", "utf8");
   res.send(doc);
 });
 
 app.get("/postlogin", function (req, res) {
-  //console.log(process.env);
+  console.log(process.env);
   // retrieve and send an HTML document from the file system
   let doc = fs.readFileSync("./app/text/nav_after_login.html", "utf8");
   res.send(doc);

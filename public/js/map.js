@@ -1,3 +1,19 @@
+function insertNameFromFirestore() {
+  //check if user is logged in
+  firebase.auth().onAuthStateChanged(user => {
+      if (user) { //if user logged in
+          console.log(user.uid)
+          db.collection("users").doc(user.uid).get().then(userDoc => {
+              console.log(userDoc.data().name)
+              userName = userDoc.data().name;
+              console.log(userName)
+              document.getElementById("name-goes-here").innerHTML = userName;
+          })
+      }
+  })
+}
+insertNameFromFirestore();  // run the funtion.
+
 function showMap() {
   // Defines basic mapbox data
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
@@ -176,6 +192,9 @@ function showMap() {
     );
   });
 }
+
+// Insert name function using the global variable "currentUser"
+
 
 // Call the function to display the map with the user's location and event pins
 showMap();

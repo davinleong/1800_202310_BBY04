@@ -39,36 +39,33 @@
 </head>
 
 <body>
-  <!-- This is the home page -->
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
 
   <!-- Top nav bar -->
   <nav id="navbarPlaceholder"></nav>
 
   <!-- Stuff -->
   <div class="container">
-    <h1>Some favourite bus stops</h1>
+    <h1>Favourite Bus Stops for <span id=name-goes-here>Name</span></h1>
     <!-- Here is the container for cards  -->
     <div class="container">
-        <div id="busStops-go-here" class="row row-cols-auto">
-        </div>
-    </div>
+      <div id="busCardGroup" class="row row-cols-auto">
+      </div>
   </div>
 <!--Templates for general use, not displayed -->
-  <template id="busCardTemplate">
-      <div class="card py-2 mx-2" style="width: 18rem">
-          <img class="card-image card-img-top" src=" ..." alt="..." />
-          <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-schedule">placeholder</p>
-              <br />
-              <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-              </p>
-              <a class="btn btn-primary card-href">Read more ...</a>
-          </div>
+<template id="favCardTemplate">
+  <div class="card py-2 mx-2 bg-light" style="width: 10rem;">
+      <img class="card-image card-img-top" src=" ..." alt="...">
+      <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-length">placeholder</p>
+          <br>
+          <a class="btn btn-secondary card-href" id="read-more">Read more ...</a>
       </div>
-    </template>
+  </div>
+</template>
   <!-- Footer -->
   <nav id="footerPlaceholder"></nav>
 
@@ -82,6 +79,7 @@
   <script src="./js/firebaseAPI_BBY04.js"></script>
   <script src="./js/skeleton.js"></script>
   <script src="./js/script.js"></script>
+  <script src="./js/map.js"></script>
   <script src="./js/favourite.js"></script>
 </body>
 
