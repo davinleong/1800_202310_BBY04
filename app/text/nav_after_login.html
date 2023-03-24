@@ -1,72 +1,36 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="../images/hikeLogo.png" height="36">
-      HoCa Hikes</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="../aboutus.html">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../profile.html">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../main.html">Main</a>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <a class="btn btn-outline-success" href="../index.html">Logout</a>
-      </div>
-    </div>
-  </div>
-</nav> -->
+<!DOCTYPE html>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <div class="container-fluid">
+<nav class="navbar justify-content-evenly bg-primary fixed-top">
+  <div class="container py-2">
+    <a href="/">
+      <i class="material-icons">logout</i>
+    </a>
+    <a href="#">
+      <i class="material-icons"></i>
+    </a>
     <a class="navbar-brand" href="#">PhotoBuddy</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">Logout</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Dropdown
+    <a href="/friends">
+      <i class="material-icons">people</i>
+    </a>
+    <a href="#" data-bs-toggle="dropdown">
+      <i class="material-icons">menu</i>
+      <ul class="dropdown-menu bg-primary">
+        <li>
+          <a href="/settings">
+            <i class="material-icons dropdown-item">settings</i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">About us</a></li>
-            <li><a class="dropdown-item" href="#">Download</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Report</a>
-            </li>
-          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+        <li>
+          <a href="/pets">
+            <i class="material-icons dropdown-item">pets</i>
+          </a>
+        </li>
+        <li>
+          <a href="/listView">
+            <i class="material-icons dropdown-item">map</i>
+          </a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success" type="button" onclick="location.href='/search' ">
-          Search
-        </button>
-      </form>
-    </div>
+    </a>
   </div>
 </nav>

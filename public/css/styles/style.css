@@ -46,3 +46,11 @@ a:visited {
 a:active {
   color:aquamarine;
 }
+
+.dropdown-item {
+  color:aquamarine;
+}
+
+.bus-body {
+  border-radius:10px;
+}
