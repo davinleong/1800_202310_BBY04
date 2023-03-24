@@ -14,18 +14,18 @@ a:hover {
 
 }
 
-body {
-  background-color: #E8F1F2;                /* some primary colour */
-  display:grid;
-  height:100vh;
-  width:100vw;
-  grid-template-columns: 1fr;
-  grid-template-rows: 10% 80% 10%;
-  grid-template-areas: 
-      "nav"
-      "container py-4"
-      "footer";
-}
+  body {
+    background-color: #E8F1F2;                /* some primary colour */
+    display:grid;
+    height:100vh;
+    width:100vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas: 
+        "nav"
+        "container py-4"
+        "footer";
+  }
 
 #picture {
   margin-left:25%;
@@ -33,6 +33,11 @@ body {
   max-height: 50%;
   display:block;
 }
+
+/* .bus-img{
+  height: 10%;
+  width: 10%;
+} */
 
 /* this is the new font for my logo navbar brand */
 .navbar-brand{
@@ -53,4 +58,14 @@ a:active {
 
 .bus-body {
   border-radius:10px;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+#reviewCardGroup {
+  height: 400px; /* set a fixed height for the container */
+  overflow-y: auto; /* add vertical scrollbar if content overflows */
 }

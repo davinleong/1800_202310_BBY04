@@ -4,7 +4,7 @@ function writeBus() {
 
   busRef.add({
     number: "130",
-    description: "Kootenay Loop / Phibbs Exchange", //replace with your own city?
+    description: "Metrotown Station / Kootenay Loop", //replace with your own city?
     city: "Burnaby",
     province: "BC",
   });
@@ -16,7 +16,19 @@ function writeBus() {
   });
   busRef.add({
     number: "144",
-    description: "Metrotown Station / SFU", //replace with your own city?
+    description: "Metrotown Station / SFU Transit Exchange", //replace with your own city?
+    city: "Burnaby",
+    province: "BC",
+  });
+  busRef.add({
+    number: "25",
+    description: "Brentwood Station / UBC Exchange", //replace with your own city?
+    city: "Burnaby",
+    province: "BC",
+  });
+  busRef.add({
+    number: "430",
+    description: "Metrotown Station / Eastbound Cook Rd", //replace with your own city?
     city: "Burnaby",
     province: "BC",
   });
