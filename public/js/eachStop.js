@@ -13,9 +13,9 @@ function displayBusStopInformation() {
     busStopsCode = busStopsInfo.code;
     busStopsName = busStopsInfo.name;
 
-    document.getElementById("busStopName").innerHTML = busStopName;
+    document.getElementById("busStopName").innerHTML = busStopsName;
     let imgEvent = document.querySelector(".bus-img");
-    imgEvent.src = "../images/" + busStopsCode + ".jpg";
+    imgEvent.src = "/images/" + busStopsCode + ".jpg";
   }
 
   )

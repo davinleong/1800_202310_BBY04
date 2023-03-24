@@ -1,15 +1,15 @@
 function insertNameFromFirestore() {
   //check if user is logged in
   firebase.auth().onAuthStateChanged(user => {
-      if (user) { //if user logged in
-          console.log(user.uid)
-          db.collection("users").doc(user.uid).get().then(userDoc => {
-              console.log(userDoc.data().name)
-              userName = userDoc.data().name;
-              console.log(userName)
-              document.getElementById("name-goes-here").innerHTML = userName;
-          })
-      }
+    if (user) { //if user logged in
+      console.log(user.uid)
+      db.collection("users").doc(user.uid).get().then(userDoc => {
+        console.log(userDoc.data().name)
+        userName = userDoc.data().name;
+        console.log(userName)
+        document.getElementById("name-goes-here").innerHTML = userName;
+      })
+    }
   })
 }
 insertNameFromFirestore();  // run the funtion.
@@ -60,7 +60,11 @@ function showMap() {
             features.push({
               'type': 'Feature',
               'properties': {
-                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/eachStop" target="_blank" title="Opens in a new window">Read more</a>`
+                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
+                <a href="/eachStop" 
+                target="_blank" 
+                onclick="storageSet();"
+                title="Opens in a new window">Read more</a>`
               },
               'geometry': {
                 'type': 'Point',
@@ -198,3 +202,7 @@ function showMap() {
 
 // Call the function to display the map with the user's location and event pins
 showMap();
+
+function storageSet() {
+  localStorage.setItem("docID", doc.id);
+}
