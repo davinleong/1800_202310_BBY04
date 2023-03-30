@@ -1,10 +1,25 @@
+var currentUser;
+
+function doAll() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      currentUser = db.collection("users").doc(user.uid);
+      console.log(user.uid);
+      console.log(currentUser);
+    } else {
+      return false; 
+    }
+  })
+}
+doAll();
+
 function displayBusStopInformation() {
   //retrieve the document id from the url
   let params = new URL(window.location.href) //get the url from the searbar
-  let ID = params.searchParams.get("docID");
-  console.log(ID);
+  let docID = params.searchParams.get("docID");
+  console.log(docID);
 
-  db.collection("busStops").doc(ID).get().then(thisBusStops => {
+  db.collection("busStops").doc(docID).get().then(thisBusStops => {
     busStopsInfo = thisBusStops.data();
     busStopsCode = busStopsInfo.code;
     busStopsName = busStopsInfo.name;
@@ -13,20 +28,24 @@ function displayBusStopInformation() {
     let imgEvent = document.querySelector(".bus-img");
     imgEvent.src = "../images/" + busStopsCode + ".jpg";
     //newcard.querySelector('i').id = 'save-' + docID;
-    document.getElementById("bookmark").querySelector('i').id = 'save-' + docID;
+    document.getElementById("bookmark").id = 'save-' + docID;
     // this line will call a function to save the hikes to the user's document             
     //newcard.querySelector('i').onclick = () => toggleBookmark(docID);
-    document.getElementById("bookmark").querySelector('i').onclick = () => toggleBookmark(docID);
+    document.getElementById("save-"+docID).onclick = () => toggleBookmark(docID);
     //Ensure that the bookmark displays correctly as filled
-    //if it is already in the favourites
-    currentUser.get().then(userDoc => {
-        //get the user name
-        var bookmarks = userDoc.data().bookmarks;
-        if (bookmarks.includes(docID)) {
-           document.getElementById('save-' + docID).innerText = 'bookmark';
-        }
-      })   
 
+    //if it is already in the favourites
+    if (!doAll()) {
+      return;
+    } else {
+      currentUser.get().then(userDoc => {
+          //get the user name
+          var bookmarks = userDoc.data().bookmarks;
+          if (bookmarks.includes(docID)) {
+            document.getElementById('save-' + docID).innerText = 'bookmark';
+          }
+      })   
+    }
   })
 
 }
@@ -75,9 +94,49 @@ function populateReviews() {
 populateReviews();
 
 //Bookmark 
-function toggleBookmark() {
-  var currentUser = firebase.auth().currentUser; 
-  currentUser.get().then(userDoc => {
+function toggleBookmark(busDocId) {
+  //alert("Boom!");
+  if (!doAll()) {
+    alert("Please log in first to gain more access.");
+  } else {  
+    currentUser.get().then(userDoc => {
+      if (userDoc.data().bookmarks !== undefined) {
+        var bookmarks = userDoc.data().bookmarks;
+        var iconID = "save-" + busDocId;
+        if (bookmarks.includes(busDocId)) {
+          currentUser.update({
+            bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
+          }).then(function () {
+              console.log("Bookmark removed for: " + currentUser);
+              document.getElementById(iconID).innerText = 'bookmark_border';
+          });
+        }
+        else {  
+          currentUser.set({
+            bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
+          }, {
+              merge: true
+          }).then(function () {
+              console.log("Bookmark added for: " + currentUser);
+              document.getElementById(iconID).innerText = 'bookmark';
+          });
+        }
+      } else {
+        currentUser.set({
+          bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
+        }, {
+            merge: true
+        }).then(function () {
+            console.log("Bookmark added for: " + currentUser);
+            document.getElementById(iconID).innerText = 'bookmark';
+        });
+      }
+    })
+  } 
+
+  /*currentUser.get().then(userDoc => {
+    if (!userDoc.has("bookmarks")) {
+    }
       var bookmarks = userDoc.data().bookmarks;
       var iconID = 'save-' + busDocID;
       if (bookmarks.includes(busDocID)) {
@@ -97,5 +156,5 @@ function toggleBookmark() {
               document.getElementById(iconID).innerText = 'bookmark';
           });
       }
-  });
+  });*/
 }
