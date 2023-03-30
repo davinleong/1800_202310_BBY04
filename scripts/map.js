@@ -61,7 +61,7 @@ function showMap() {
               'type': 'Feature',
               'properties': {
                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
-                <a href="/eachStop" 
+                <a href="/eachStop.html" 
                 target="_blank" 
                 onclick="storageSet();"
                 title="Opens in a new window">Read more</a>`
