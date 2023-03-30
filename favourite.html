@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Search</title>
+  <title>Home</title>
   <meta name="comp1800 template" content="My 1800 App" />
 
   <!-- Required meta tags -->
@@ -16,7 +16,7 @@
   <!-- Boostrap Library JS CDN  go here -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-  </script>
+    </script>
 
   <!-------------------------------------------------------->
   <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
@@ -35,61 +35,54 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Link to styles of your own -->
-  <link rel="stylesheet" href="./css/styles/style.css" />
+  <link rel="stylesheet" href="./styles/style.css" />
 </head>
 
 <body>
-  <!-- This is the search page -->
+  <!------------------------------>
+  <!-- Your HTML Layout go here -->
+  <!------------------------------>
 
   <!-- Top nav bar -->
   <nav id="navbarPlaceholder"></nav>
 
-  <!-- Body -->
-  <!-- Search bar -->
-  <div class="container py-4">
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success" type="button">
-        Search
-      </button>
-    </form>
-    <!-- Recent searches and search contents -->
-    <div>
-      <div class="container">
-        <div id="Recent Searches-go-here" class="col col-auto">
-        </div>
-      </div>
-    </div>
+  <!-- Stuff -->
+  <div class="container">
+    <h1>Favourite Bus Stops for <span id="name-goes-here">Name</span></h1>
+    <!-- Here is the container for cards  -->
     <div class="container">
-      <div id="Bus Lines-go-here" class="col col-auto">
+      <div id="busCardGroup" class="row row-cols-auto">
       </div>
     </div>
-  </div>
-  <!-- Bus Line template -->
-  <template id="busLineTemplate">
-    <div class="bus py-2" style="width:auto" >
-      <a href="/busLine" style="cursor: pointer">
-        <div class="container bg-light py-4 bus-body">
-          <h5 class="bus-number">Bus Number</h5>
-          <h5 class="bus-details">Details</h5> </h5>
+    <!--Templates for general use, not displayed -->
+    <template id="favCardTemplate">
+      <div class="card py-2 mx-2 bg-light" style="width: 10rem;">
+        <img class="card-image card-img-top" src=" ..." alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-length">placeholder</p>
+          <br>
+          <a class="btn btn-secondary card-href" id="read-more">Read more ...</a>
         </div>
-      </a>
-    </div>
-  </template>
+      </div>
+    </template>
+    <!-- Footer -->
+    <nav id="footerPlaceholder"></nav>
 
-  <!-- Footer -->
-  <nav id="footerPlaceholder"></nav>
+    <!-- <button type="button" onclick="location.href='/' ">Index</button> -->
 
-  <!-- <button type="button" onclick="location.href='/' ">Index</button> -->
-  <!---------------------------------------------->
-  <!-- Your own JavaScript functions go here    -->
-  <!---------------------------------------------->
-
-  <!-- Link to scripts of your own -->
-  <script src="./js/firebaseAPI_BBY04.js"></script>
-  <script src="./js/skeleton.js"></script>
-  <script src="./js/main.js"></script>
-  <script src="./js/search.js"></script>
+  </div>
 </body>
+<!---------------------------------------------->
+<!-- Your own JavaScript functions go here    -->
+<!---------------------------------------------->
+
+<!-- Link to scripts of your own -->
+<script src="./scripts/firebaseAPI_BBY04.js"></script>
+<script src="./scripts/skeleton.js"></script>
+<script src="./scripts/main.js"></script>
+<script src="./scripts/map.js"></script>
+<script src="./scripts/favourite.js"></script>
+
 
 </html>

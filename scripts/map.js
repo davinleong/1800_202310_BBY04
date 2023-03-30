@@ -53,16 +53,14 @@ function showMap() {
             preview = doc.data().details; // Text Preview
             // img = doc.data().posterurl; // Image
             // url = doc.data().link; // URL
-            docID = doc.id;
-
-            //localStorage.setItem("docID", doc.id);
 
             // Pushes information into the features array
             features.push({
               'type': 'Feature',
               'properties': {
                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
-                <a href="/eachStop?ID=${docID}"
+                <a href="/eachStop.html?docID=${doc.id}" 
+                target="_blank" 
                 title="Opens in a new window">Read more</a>`
               },
               'geometry': {
@@ -198,9 +196,10 @@ function showMap() {
 
 // Insert name function using the global variable "currentUser"
 
+
 // Call the function to display the map with the user's location and event pins
 showMap();
 
-//function saveDocID() {
-//  localStorage.setItem("docID", code);
-//}
+function storageSet() {
+  localStorage.setItem("docID", doc.id);
+}
