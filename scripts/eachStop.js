@@ -1,21 +1,17 @@
-
 function displayBusStopInformation() {
   //retrieve the document id from the url
-  // let params = new URL(window.location.href) //get the url from the searbar
-  // let ID = params.searchParams.get("docID");
-  // console.log(ID);
-
-  var ID = localStorage.getItem("docID");
-  // alert(ID);
+  let params = new URL(window.location.href) //get the url from the searbar
+  let ID = params.searchParams.get("docID");
+  console.log(ID);
 
   db.collection("busStops").doc(ID).get().then(thisBusStops => {
     busStopsInfo = thisBusStops.data();
     busStopsCode = busStopsInfo.code;
     busStopsName = busStopsInfo.name;
 
-    document.getElementById("busStopName").innerHTML = busStopsName;
+    document.getElementById("busStopsName").innerHTML = busStopsName;
     let imgEvent = document.querySelector(".bus-img");
-    imgEvent.src = "/images/" + busStopsCode + ".jpg";
+    imgEvent.src = "../images/" + busStopsCode + ".jpg";
     //newcard.querySelector('i').id = 'save-' + docID;
     document.getElementById("bookmark").querySelector('i').id = 'save-' + docID;
     // this line will call a function to save the hikes to the user's document             
@@ -40,7 +36,7 @@ function saveBusDocumentIDAndRedirect() {
   let params = new URL(window.location.href) //get the url from the search bar
   let ID = params.searchParams.get("docID");
   localStorage.setItem('busDocID', ID);
-  window.location.href = 'feed.html';
+  window.location.href = 'review.html';
 }
 
 //Reviews

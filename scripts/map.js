@@ -54,16 +54,13 @@ function showMap() {
             // img = doc.data().posterurl; // Image
             // url = doc.data().link; // URL
 
-            localStorage.setItem("docID", doc.id);
-
             // Pushes information into the features array
             features.push({
               'type': 'Feature',
               'properties': {
                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
-                <a href="/eachStop.html" 
+                <a href="/eachStop.html?docID=${doc.id}" 
                 target="_blank" 
-                onclick="storageSet();"
                 title="Opens in a new window">Read more</a>`
               },
               'geometry': {

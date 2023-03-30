@@ -20,7 +20,7 @@ function insertNameFromFirestore() {
     }
   })
 }
-  insertNameFromFirestore();
+insertNameFromFirestore();
 
 //------------------------------------------------
 // Call this function when the "logout" button is clicked
