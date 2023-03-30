@@ -1,5 +1,4 @@
 function sayHello() {
-    
 }
 //sayHello();
 
@@ -15,12 +14,22 @@ function insertNameFromFirestore() {
         userName = userDoc.data().name;
         console.log(userName)
         document.getElementById("name-goes-here").innerHTML = userName;
-
       })
     }
   })
 }
-  insertNameFromFirestore();
+//insertNameFromFirestore();
+
+function doAll() {
+  firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+          insertNameFromFirestore(user);
+      } else {
+          console.log("No user is signed in");
+      }
+  });
+}
+doAll();
 
 //------------------------------------------------
 // Call this function when the "logout" button is clicked

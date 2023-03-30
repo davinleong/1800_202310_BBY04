@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>Home</title>
-  <meta name="comp1800 template" content="My 1800 App" />
+  <title>Bus Line</title>
+  <meta name="comp1800 template" content="My 1800 App"/>
 
   <!-- Required meta tags -->
   <meta charset="utf-8" />
@@ -28,7 +28,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-
+  
   <!-- Other libraries go here -->
 
   <!-- Google Icons (Material Design)-->
@@ -39,16 +39,15 @@
 </head>
 
 <body>
-  <!-- This is the home page -->
-
+  <!-- This page is to display all bus stops of a bus line -->
   <!-- Top nav bar -->
   <nav id="navbarPlaceholder"></nav>
 
-  <!-- Stuff -->
+  <!-- Body -->
   <div class="container py-4">
     <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success" type="button">
+      <button class="btn btn-outline-success" type="button"> 
         Search
       </button>
     </form>
@@ -58,6 +57,7 @@
     </div>
   </div>
 
+  <!-- Template -->
   <template id="busStopTemplate">
     <div class="bus py-2" style="width:auto" >
       <a href="/home" style="cursor: pointer">
@@ -67,7 +67,6 @@
       </a>
     </div>
   </template>
-
 
   <!-- Footer -->
   <nav id="footerPlaceholder"></nav>
