@@ -1,18 +1,3 @@
-function insertNameFromFirestore() {
-  //check if user is logged in
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) { //if user logged in
-      console.log(user.uid)
-      db.collection("users").doc(user.uid).get().then(userDoc => {
-        console.log(userDoc.data().name)
-        userName = userDoc.data().name;
-        console.log(userName)
-        document.getElementById("name-goes-here").innerHTML = userName;
-      })
-    }
-  })
-}
-insertNameFromFirestore();  // run the funtion.
 
 function showMap() {
   // Defines basic mapbox data
@@ -60,7 +45,7 @@ function showMap() {
               'properties': {
                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
                 <a href="/eachStop.html?docID=${doc.id}" 
-                target="_blank" 
+                target="_self" 
                 title="Opens in a new window">Read more</a>`
               },
               'geometry': {

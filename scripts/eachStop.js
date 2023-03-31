@@ -1,78 +1,103 @@
-function displayBusStopInformation() {
-  //retrieve the document id from the url
-  let params = new URL(window.location.href) //get the url from the searbar
-  let ID = params.searchParams.get("docID");
-  console.log(ID);
+var currentUser;
 
-  db.collection("busStops").doc(ID).get().then(thisBusStops => {
-    busStopsInfo = thisBusStops.data();
-    busStopsCode = busStopsInfo.code;
-    busStopsName = busStopsInfo.name;
-
-    document.getElementById("busStopsName").innerHTML = busStopsName;
-    let imgEvent = document.querySelector(".bus-img");
-    imgEvent.src = "../images/" + busStopsCode + ".jpg";
-    //newcard.querySelector('i').id = 'save-' + docID;
-    document.getElementById("bookmark").querySelector('i').id = 'save-' + docID;
-    // this line will call a function to save the hikes to the user's document             
-    //newcard.querySelector('i').onclick = () => toggleBookmark(docID);
-    document.getElementById("bookmark").querySelector('i').onclick = () => toggleBookmark(docID);
-    //Ensure that the bookmark displays correctly as filled
-    //if it is already in the favourites
-    currentUser.get().then(userDoc => {
-        //get the user name
-        var bookmarks = userDoc.data().bookmarks;
-        if (bookmarks.includes(docID)) {
-           document.getElementById('save-' + docID).innerText = 'bookmark';
-        }
-      })   
-
+function doAll() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      currentUser = db.collection("users").doc(user.uid);
+      console.log(user.uid);
+      console.log(currentUser);
+    } else {
+      return false; 
+    }
   })
-
 }
-displayBusStopInformation();
+doAll();
+
+function playBusStopInformation() {
+  //retrieve the document id from the url
+  let params = new URL(window.location.href); //get the url from the searbar
+  let docID = params.searchParams.get("docID");
+  console.log(docID);
+
+  db.collection("busStops")
+    .doc(docID)
+    .get()
+    .then(thisBusStops => {
+      console.log(thisBusStops.data()); //debug statement
+      busStopsInfo = thisBusStops.data();
+      busStopsCode = busStopsInfo.code;
+      busStopsName = busStopsInfo.name;
+      console.log(busStopsCode, busStopsName); //debug statement
+
+      let busStopsNameEl = document.getElementById("busStopsName");
+      if (busStopsNameEl) {
+        busStopsNameEl.innerHTML = busStopsName;
+      } else {
+        console.log("busStopsName element not found"); //debug statement
+      }
+
+      let imgEvent = document.querySelector(".bus-img");
+      if (imgEvent) {
+        imgEvent.src = "../images/" + busStopsCode + ".jpg";
+      } else {
+        console.log("imgEvent element not found"); //debug statement
+      }
+    })
+    .catch(error => {
+      console.log(error); //debug statement
+    });
+}
+
+playBusStopInformation()
 
 function saveBusDocumentIDAndRedirect() {
   let params = new URL(window.location.href) //get the url from the search bar
   let ID = params.searchParams.get("docID");
   localStorage.setItem('busDocID', ID);
-  window.location.href = 'review.html';
+  window.location.href = 'newsFeed.html';
 }
 
-//Reviews
-function populateReviews() {
-  let hikeCardTemplate = document.getElementById("reviewCardTemplate");
-  let hikeCardGroup = document.getElementById("reviewCardGroup");
+//News Feed
+function populateNewsFeed() {
+  let busCardTemplate = document.getElementById("newsFeedCardTemplate");
+  let busCardGroup = document.getElementById("newsFeedCardGroup");
 
   let params = new URL(window.location.href); //get the url from the searbar
   let busID = params.searchParams.get("docID");
 
-  // doublecheck: is your collection called "Reviews" or "reviews"?
-  db.collection("reviews")
+  // doublecheck: is your collection called "newsFeed"?
+  db.collection("newsFeed")
     .where("busDocID", "==", busID)
     .get()
-    .then((allReviews) => {
-      reviews = allReviews.docs;
-      console.log(reviews);
-      reviews.forEach((doc) => {
-        var title = doc.data().name;       // get value of the "name" key
-        var details = doc.data().details;  // get value of the "details" key
-				var busCode = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-        var busSchedule = doc.data().schedule; //gets the bus schedule
-        var docID = doc.id;
+    .then((allnewsFeed) => {
+      newsFeed = allnewsFeed.docs;
+      console.log(newsFeed);
+      newsFeed.forEach((doc) => {
+        var title = doc.data().title;
+        var image = doc.data().image; 
+        console.log(image);      
+        var description = doc.data().description; 
+        var condition = doc.data().condition; 
+				var flooded = doc.data().flooded;    
+        var heavySnow = doc.data().heavySnow; 
+        var heat = doc.data().heat; 
+        var time = doc.data().timestamp.toDate();
 
-        let reviewCard = reviewCardTemplate.content.cloneNode(true);
-        newcard.querySelector('.card-title').innerHTML = title;
-        newcard.querySelector('.card-schedule').innerHTML = busSchedule;
-        newcard.querySelector('.card-image').src = `./images/${busCode}.jpg`; //Example: BUS01.jpg
-        newcard.querySelector('.card-text').innerHTML = details;
-        newcard.querySelector('a').href = "eachBus.html?docID="+docID;
+        let newsFeedCard = newsFeedCardTemplate.content.cloneNode(true);
+        newsFeedCard.querySelector('.title').innerHTML = title;
+        newsFeedCard.querySelector('.card-image').src = image;
+        newsFeedCard.querySelector('.description').innerHTML = description;
+        newsFeedCard.querySelector('.time').innerHTML = new Date(time).toLocaleString();
+        newsFeedCard.querySelector(".condition").innerHTML = `condition: ${condition}`;
+        newsFeedCard.querySelector(".flooded").innerHTML = `flooded: ${flooded}`;
+        newsFeedCard.querySelector(".heavySnow").innerHTML = `heavySnow: ${heavySnow}`;
+        newsFeedCard.querySelector(".heat").innerHTML = `heat: ${heat}`;
         console.log("this card");
-        reviewCardGroup.appendChild(reviewCard);
+        newsFeedCardGroup.appendChild(newsFeedCard);
       });
     });
 }
-populateReviews();
+populateNewsFeed();
 
 //Bookmark 
 function toggleBookmark() {

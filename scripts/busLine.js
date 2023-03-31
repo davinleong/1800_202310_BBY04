@@ -82,11 +82,11 @@ function writeBus130() {
   function displayBusStops(collection) {
     let buStopTemplate = document.getElementById("busStopTemplate");
   
-    db.collection(collection).get()   //the collection called "hikes"
+    db.collection(collection).get()   //the collection called "busStops"
       .then(allBusStop => {
-        //var i = 1;  //Optional: if you want to have a unique ID for each hike
+        //var i = 1;  //Optional: if you want to have a unique ID for each bus stop
         allBusStop.forEach(doc => { //iterate thru each doc
-          var description = doc.data().description;    //get unique ID to each hike to be used for fetching right image
+          var description = doc.data().description;    //get unique ID to each bus stop to be used for fetching right image
           let newcard = busStopTemplate.content.cloneNode(true);
   
           //update title and text and image
@@ -97,7 +97,7 @@ function writeBus130() {
           // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
           // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
   
-          //attach to gallery, Example: "hikes-go-here"
+          //attach to gallery, Example: "buses-go-here"
           document.getElementById(collection + "-go-here").appendChild(newcard);
   
           //i++;   //Optional: iterate variable to serve as unique ID

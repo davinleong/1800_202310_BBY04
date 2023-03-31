@@ -56,27 +56,31 @@
       <img class="bus-img" src="" alt="Bus Stop photo" width="60%">
       <i class="material-icons" id="bookmark">bookmark_border</i>
       <button class="btn btn-primary position-absolute bottom-0 end-0 m-3"
-        onclick="saveBusStopDocumentIDAndRedirect()">Write Review</button>
+        onclick="saveBusDocumentIDAndRedirect()">Post</button>
     </div>
   </div>
 
   <div class="container">
-    <h2>Reviews:</h2>
-    <div id="details-go-here"></div>
+    <h2>News Feed</h2>
+    <div id="posts-go-here"></div>
     <!-- Here is container for cards  -->
     <div class="container">
-      <div id="reviewCardGroup" class="row row-cols-auto">
+      <div id="newsFeedCardGroup" class="row row-cols-auto">
       </div>
     </div>
   </div>
 
-  <template id="reviewCardTemplate">
+  <template id="newsFeedCardTemplate">
     <div class="card bg-secondary">
-      <img class="card-img-top">
       <div class="card-body bg-light">
-        <h5 class="card-title">placeholder</h5>
-        <p class="card-schedule">placeholder</p>
-        <p class="card-image">placeholder</p>   
+        <img class="card-image card-img-top" src=" ..." alt="...">
+        <h5 class="title">placeholder</h5>
+        <p class="description">placeholder</p>
+        <p class="time">placeholder</p>
+        <p class="condition">placeholder</p> 
+        <p class="flooded">placeholder</p> 
+        <p class="heavySnow">placeholder</p> 
+        <p class="heat">placeholder</p>    
         <br>
         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
         </p>
@@ -93,7 +97,6 @@
   <script src="./scripts/firebaseAPI_BBY04.js"></script>
   <script src="./scripts/skeleton.js"></script>
   <script src="./scripts/eachStop.js"></script>
-  <script src="./scripts/favourite.js"></script>
   <script src="./scripts/main.js"></script>
 
 
