@@ -131,7 +131,6 @@ function writeBusStops() {
 function doAll() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            insertNameFromFirestore();
             getBookmarks(user)
         } else {
             console.log("No user is signed in");

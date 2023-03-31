@@ -100,9 +100,49 @@ function populateNewsFeed() {
 populateNewsFeed();
 
 //Bookmark 
-function toggleBookmark() {
-  var currentUser = firebase.auth().currentUser; 
-  currentUser.get().then(userDoc => {
+function toggleBookmark(busDocId) {
+  //alert("Boom!");
+  if (!doAll()) {
+    alert("Please log in first to gain more access.");
+  } else {  
+    currentUser.get().then(userDoc => {
+      if (userDoc.data().bookmarks !== undefined) {
+        var bookmarks = userDoc.data().bookmarks;
+        var iconID = "save-" + busDocId;
+        if (bookmarks.includes(busDocId)) {
+          currentUser.update({
+            bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
+          }).then(function () {
+              console.log("Bookmark removed for: " + currentUser);
+              document.getElementById(iconID).innerText = 'bookmark_border';
+          });
+        }
+        else {  
+          currentUser.set({
+            bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
+          }, {
+              merge: true
+          }).then(function () {
+              console.log("Bookmark added for: " + currentUser);
+              document.getElementById(iconID).innerText = 'bookmark';
+          });
+        }
+      } else {
+        currentUser.set({
+          bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
+        }, {
+            merge: true
+        }).then(function () {
+            console.log("Bookmark added for: " + currentUser);
+            document.getElementById(iconID).innerText = 'bookmark';
+        });
+      }
+    })
+  } 
+
+  /*currentUser.get().then(userDoc => {
+    if (!userDoc.has("bookmarks")) {
+    }
       var bookmarks = userDoc.data().bookmarks;
       var iconID = 'save-' + busDocID;
       if (bookmarks.includes(busDocID)) {
@@ -122,5 +162,5 @@ function toggleBookmark() {
               document.getElementById(iconID).innerText = 'bookmark';
           });
       }
-  });
+  });*/
 }

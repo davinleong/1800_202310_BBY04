@@ -44,7 +44,8 @@
   <!-- Top nav bar -->
   <nav id="navbarPlaceholder"></nav>
 
-  <!-- Stuff -->
+  <!-- Body -->
+  <!-- Search bar -->
   <div class="container py-4">
     <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -52,12 +53,19 @@
         Search
       </button>
     </form>
+    <!-- Recent searches and search contents -->
+    <div>
+      <div class="container">
+        <div id="Recent Searches-go-here" class="col col-auto">
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div id="Bus Lines-go-here" class="col col-auto">
       </div>
     </div>
   </div>
-
+  <!-- Bus Line template -->
   <template id="busLineTemplate">
     <div class="bus py-2" style="width:auto">
       <a href="busLine.html" style="cursor: pointer">
@@ -73,7 +81,6 @@
   <nav id="footerPlaceholder"></nav>
 
   <!-- <button type="button" onclick="location.href='/' ">Index</button> -->
-
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
   <!---------------------------------------------->

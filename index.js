@@ -89,7 +89,7 @@ app.get("/footer", function (req, res) {
   res.send(doc);
 });
 
-app.get("/eachStop", function (req, res) {
+app.get("/eachStop*", function (req, res) {
   //console.log(process.env);
   // retrieve and send an HTML document from the file system
   let doc = fs.readFileSync("./app/html/eachStop.html", "utf8");
