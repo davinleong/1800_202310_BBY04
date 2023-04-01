@@ -6,8 +6,9 @@ function doAll() {
       currentUser = db.collection("users").doc(user.uid);
       console.log(user.uid);
       console.log(currentUser);
+      return 1;
     } else {
-      return false; 
+      return 2;
     }
   })
 }
@@ -41,6 +42,21 @@ function playBusStopInformation() {
         imgEvent.src = "../images/" + busStopsCode + ".jpg";
       } else {
         console.log("imgEvent element not found"); //debug statement
+      }
+      document.getElementById('bookmark').id = "save-" + docID;
+      document.getElementById('save-'+docID).onclick = () => toggleBookmark(docID);
+
+      if (doAll() == 1) {
+        currentUser.get().then(userDoc => {
+          //get the user name
+          var bookmarks = userDoc.data().bookmarks;
+          if (bookmarks.includes(docID)) {
+             document.getElementById('save-' + docID).innerText = 'bookmark';
+          }
+          else {
+            document.getElementById('save-' + docID).innerText = 'bookmark_border';
+          }
+        })
       }
     })
     .catch(error => {
@@ -101,14 +117,18 @@ populateNewsFeed();
 
 //Bookmark 
 function toggleBookmark(busDocId) {
-  //alert("Boom!");
-  if (!doAll()) {
+  alert("Boom!");
+  console.log(busDocId);
+  if (doAll() == 2) {
     alert("Please log in first to gain more access.");
   } else {  
     currentUser.get().then(userDoc => {
-      if (userDoc.data().bookmarks !== undefined) {
+      var iconID = "save-" + busDocId;
+      //checks if user has a bookmark field already in their doc
+      if (userDoc.data().bookmarks.exist) {
+        //if yes, copy the bookmark array onto bookmarks
         var bookmarks = userDoc.data().bookmarks;
-        var iconID = "save-" + busDocId;
+        //if bookmarks has this bus stop already, remove it
         if (bookmarks.includes(busDocId)) {
           currentUser.update({
             bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
@@ -116,8 +136,8 @@ function toggleBookmark(busDocId) {
               console.log("Bookmark removed for: " + currentUser);
               document.getElementById(iconID).innerText = 'bookmark_border';
           });
-        }
-        else {  
+        //otherwise, add it in
+        } else {  
           currentUser.set({
             bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
           }, {
@@ -127,6 +147,8 @@ function toggleBookmark(busDocId) {
               document.getElementById(iconID).innerText = 'bookmark';
           });
         }
+      //if user does not have a bookmark field in their doc,
+      //create one and add the bus stop in  
       } else {
         currentUser.set({
           bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
