@@ -45,7 +45,8 @@ function showMap() {
               'properties': {
                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> 
                 <a href="/eachStop.html?docID=${doc.id}" 
-                target="_self" 
+                target="_self"
+                onclick="addToRecentSearch(doc.id)" o
                 title="Opens in a new window">Read more</a>`
               },
               'geometry': {
@@ -187,4 +188,47 @@ showMap();
 
 function storageSet() {
   localStorage.setItem("docID", doc.id);
+}
+
+function addToRecentSearch(busDocId) {
+  console.log("Added to recent searches!");
+  console.log(busDocId);
+  if (doAll() == 2) {
+    alert("Please log in first to gain more access.")
+  } else {  
+    currentUser.get().then(userDoc => {
+      //checks if user has a recentSearh field already in their doc
+      if (userDoc.data().recentSearch.exist) {
+        //if yes, reference the recentSearch array onto recentSearches
+        var recentSearches = userDoc.data().recentSearch;
+        //if recentSearches has this bus stop already, remove it
+        if (recentSearches.includes(busDocId)) {
+          currentUser.update({
+            recentSearch: firebase.firestore.FieldValue.arrayRemove(busDocId)
+          }).then(function () {
+              console.log("Recent search removed for: " + currentUser);
+          });
+        //otherwise, add it in
+        } else {  
+          currentUser.set({
+            recentSearch: firebase.firestore.FieldValue.arrayUnion(busDocId)
+          }, {
+              merge: true
+          }).then(function () {
+              console.log("Recent search added for: " + currentUser);
+          });
+        }
+      //if user does not have a recentSearch field in their doc,
+      //create one and add the recent search in  
+      } else {
+        currentUser.set({
+          recentSearch: firebase.firestore.FieldValue.arrayUnion(busDocId)
+        }, {
+            merge: true
+        }).then(function () {
+            console.log("Recent search added for: " + currentUser);
+        });
+      }
+    })
+  } 
 }

@@ -1,18 +1,17 @@
 var currentUser;
 
-function doAll() {
+function loginOrNot() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
+      //if user is logged in, currentUser is referenced from firebase
       currentUser = db.collection("users").doc(user.uid);
-      console.log(user.uid);
-      console.log(currentUser);
-      return 1;
+      //console.log(user.uid);
     } else {
-      return 2;
+      return false;
     }
   })
 }
-doAll();
+loginOrNot();
 
 function playBusStopInformation() {
   //retrieve the document id from the url
@@ -20,9 +19,7 @@ function playBusStopInformation() {
   let docID = params.searchParams.get("docID");
   console.log(docID);
 
-  db.collection("busStops")
-    .doc(docID)
-    .get()
+  db.collection("busStops").doc(docID).get()
     .then(thisBusStops => {
       console.log(thisBusStops.data()); //debug statement
       busStopsInfo = thisBusStops.data();
@@ -43,18 +40,20 @@ function playBusStopInformation() {
       } else {
         console.log("imgEvent element not found"); //debug statement
       }
+
+      //making the bookmark clickable
       document.getElementById('bookmark').id = "save-" + docID;
       document.getElementById('save-'+docID).onclick = () => toggleBookmark(docID);
 
-      if (doAll() == 1) {
+      //if user is logged in, display their bookmarks correctly
+      if (!loginOrNot()) {
         currentUser.get().then(userDoc => {
-          //get the user name
           var bookmarks = userDoc.data().bookmarks;
           if (bookmarks.includes(docID)) {
-             document.getElementById('save-' + docID).innerText = 'bookmark';
+             document.getElementById('save-'+docID).innerText = 'bookmark';
           }
           else {
-            document.getElementById('save-' + docID).innerText = 'bookmark_border';
+            document.getElementById('save-'+docID).innerText = 'bookmark_border';
           }
         })
       }
@@ -63,7 +62,6 @@ function playBusStopInformation() {
       console.log(error); //debug statement
     });
 }
-
 playBusStopInformation()
 
 function saveBusDocumentIDAndRedirect() {
@@ -117,72 +115,47 @@ populateNewsFeed();
 
 //Bookmark 
 function toggleBookmark(busDocId) {
-  alert("Boom!");
-  console.log(busDocId);
-  if (doAll() == 2) {
-    alert("Please log in first to gain more access.");
-  } else {  
+  //console.log("Bookmark is running " + busDocId);
+  if (loginOrNot() == false) {
+    alert("Please log in first to gain more access.")
+  } else {
     currentUser.get().then(userDoc => {
       var iconID = "save-" + busDocId;
       //checks if user has a bookmark field already in their doc
-      if (userDoc.data().bookmarks.exist) {
-        //if yes, copy the bookmark array onto bookmarks
-        var bookmarks = userDoc.data().bookmarks;
-        //if bookmarks has this bus stop already, remove it
-        if (bookmarks.includes(busDocId)) {
+      if (userDoc.data().bookmarks !== undefined) {
+        //if yes, reference the bookmarks array from firebase onto bookmark  
+        var bookmark = userDoc.data().bookmarks;
+        //if bookmark has this bus stop already, remove it in firebase  
+        if (bookmark.includes(busDocId)) {           
           currentUser.update({
             bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
           }).then(function () {
-              console.log("Bookmark removed for: " + currentUser);
+              console.log("Bookmark removed for " + userDoc.data().name);
               document.getElementById(iconID).innerText = 'bookmark_border';
           });
-        //otherwise, add it in
+        //otherwise, add the bus stop in in firebase
         } else {  
           currentUser.set({
             bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
           }, {
               merge: true
           }).then(function () {
-              console.log("Bookmark added for: " + currentUser);
+              console.log("Bookmark added for " + userDoc.data().name);
               document.getElementById(iconID).innerText = 'bookmark';
           });
         }
-      //if user does not have a bookmark field in their doc,
-      //create one and add the bus stop in  
-      } else {
+      //if user does not have a bookmarks field in their doc on firebase,
+      //create one and add the bus stop in 
+      } else { 
         currentUser.set({
           bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
         }, {
             merge: true
         }).then(function () {
-            console.log("Bookmark added for: " + currentUser);
+            console.log("Bookmark added for " + userDoc.data().name);
             document.getElementById(iconID).innerText = 'bookmark';
         });
       }
     })
   } 
-
-  /*currentUser.get().then(userDoc => {
-    if (!userDoc.has("bookmarks")) {
-    }
-      var bookmarks = userDoc.data().bookmarks;
-      var iconID = 'save-' + busDocID;
-      if (bookmarks.includes(busDocID)) {
-          currentUser.update({
-              bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocID)
-          }).then(function () {
-              console.log("Bookmark removed for: " + currentUser);
-              document.getElementById(iconID).innerText = 'bookmark_border';
-          });
-      } else {
-          currentUser.set({
-              bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocID)
-          }, {
-              merge: true
-          }).then(function () {
-              console.log("Bookmark added for: " + currentUser);
-              document.getElementById(iconID).innerText = 'bookmark';
-          });
-      }
-  });*/
 }
