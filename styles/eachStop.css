@@ -22,10 +22,11 @@
     grid-template-rows: 1fr 2fr 2fr 1fr;
     grid-template-areas: 
         "nav"
-        "container"
-        "card bg-secondary"
+        "container1"
+        "container2"
         "footer";
   }
+
   
  /* #picture {
     max-width: 50%;
@@ -34,13 +35,14 @@
   }*/
   
   .bus-img{
-    height: 30%;
-    width: 40%;
+    height: 30rem;
+    width: 40rem;
   }
 
+
   #newsFeedCardGroup{
-    height: 30%;
-    width: 40%;
+    height: 30rem;
+    width: 40rem;
   }
   
   /* this is the new font for my logo navbar brand */
