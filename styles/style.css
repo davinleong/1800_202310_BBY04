@@ -21,14 +21,14 @@
 body {
   background-color: #E8F1F2;                /* some primary colour */
   display:grid;
-  height:150vh;
+  height:100vh;
   width:100vw;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 90%;
   grid-template-areas: 
     "nav"
     "container py-4"
-    "footer";
+    ;
 }
 
 #picture {

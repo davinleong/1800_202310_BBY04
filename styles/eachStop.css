@@ -16,7 +16,7 @@
   body {
     background-color: #E8F1F2;                /* some primary colour */
     display:grid;
-    height:100vh;
+    height:150vh;
     width:100vw;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 2fr 1fr;
