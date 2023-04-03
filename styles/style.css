@@ -24,11 +24,11 @@ body {
   height:100vh;
   width:100vw;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 90%;
   grid-template-areas: 
     "nav"
     "container py-4"
-    "footer";
+    ;
 }
 
 #picture {
@@ -71,6 +71,7 @@ a:active {
 #newsFeedCardGroup {
   height: 400px; /* set a fixed height for the container */
   overflow-y: auto; /* add vertical scrollbar if content overflows */
+  overflow-x: scroll;
 }
 
 .material-icons {
