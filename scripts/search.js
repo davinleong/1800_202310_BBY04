@@ -80,6 +80,7 @@ displayBusLines("Bus Lines");
 function displayRecentSearches() {
   loginOrNot().then(currentUser => {
     if (currentUser) {
+      //document.getElementById("abc").innerHTML = "Recent Searches";
       currentUser.get().then(userDoc => {
         var recentSearch = userDoc.data().recentSearches;
 
@@ -87,12 +88,13 @@ function displayRecentSearches() {
           //console.log(busID);
           db.collection("busStops").doc(busID).get().then(thisRecentSearch => {
             description = thisRecentSearch.data().name;
+            console.log(description);
 
-            let newcard = recentSearchesTemplate.content.cloneNode(true);
-            newcard.querySelector('.recentSearch-number').innerHTML = description;
+            let newcard = busStopTemplate.content.cloneNode(true);
+            newcard.querySelector('.busName').innerHTML = description;
             newcard.querySelector('.busID').href += "?docID=" + busID;
 
-            document.getElementById("Recent Searches-go-here").appendChild(newcard);
+            document.getElementById("recentSearches-go-here").appendChild(newcard);
           })
         })
       })
@@ -102,3 +104,35 @@ function displayRecentSearches() {
   }) 
 }
 displayRecentSearches();
+
+//when searched for a street, return any bus stop associated with that street
+function displaySearchedBusStop() {
+  let searchValue = document.getElementById("searchValue").value;
+  console.log(searchValue);
+
+  const collectionRef = firebase.firestore().collection("busStops");
+
+  const busDoc = collectionRef.where(searchValue, "==", searchValue);
+
+  busDoc.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      //console.log("Hi");
+    })
+  })
+
+  /*db.collection("busStops").doc().forEach(doc => {
+    doc.where(searchValue, "==", searchValue).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, '=>', doc.data());
+
+        db.collection("busStops").doc(doc.id);
+          let newcard = busStopTemplate.content.cloneNode(true);
+          newcard.querySelector('.busName').innerHTML = searchValue;
+          newcard.querySelector('.busID').href += "?docID=" + busID;
+
+          document.getElementById("searched-go-here").appendChild(newcard);
+      })
+    })
+  }) */
+}

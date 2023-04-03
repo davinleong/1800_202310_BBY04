@@ -101,10 +101,10 @@ function populateNewsFeed() {
         newsFeedCard.querySelector('.card-image').src = image;
         newsFeedCard.querySelector('.description').innerHTML = description;
         newsFeedCard.querySelector('.time').innerHTML = new Date(time).toLocaleString();
-        newsFeedCard.querySelector(".condition").innerHTML = `condition: ${condition}`;
-        newsFeedCard.querySelector(".flooded").innerHTML = `flooded: ${flooded}`;
-        newsFeedCard.querySelector(".heavySnow").innerHTML = `heavySnow: ${heavySnow}`;
-        newsFeedCard.querySelector(".heat").innerHTML = `heat: ${heat}`;
+        newsFeedCard.querySelector(".condition").innerHTML = `Condition: ${condition}`;
+        newsFeedCard.querySelector(".flooded").innerHTML = `Flooded: ${flooded}`;
+        newsFeedCard.querySelector(".heavySnow").innerHTML = `Heavy Snow: ${heavySnow}`;
+        newsFeedCard.querySelector(".heat").innerHTML = `Heat: ${heat}`;
         console.log("this card");
         newsFeedCardGroup.appendChild(newsFeedCard);
       });

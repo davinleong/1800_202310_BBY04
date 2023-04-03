@@ -48,16 +48,23 @@
   <!-- Search bar -->
   <div class="container py-4">
     <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success" type="button">
+      <input class="form-control me-2" id="searchValue" type="search" placeholder="Search" aria-label="Search"/>
+      <button class="btn btn-outline-success" type="button" onclick="displaySearchedBusStop()">
         Search
       </button>
     </form>
 
+    <!-- Show searched bus stop -->
+    <div class="container"> Searched 
+      <div class="container"> 
+        <div id="searched-go-here" class="col col-auto">
+        </div>
+      </div>
+    </div>
     <!-- Show recent searches -->
-    <div class="container"> Recent searches
-      <div class="container">
-        <div id="Recent Searches-go-here" class="col col-auto">
+    <div class="container" id="abc"> Recent Searches
+      <div class="container"> 
+        <div id="recentSearches-go-here" class="col col-auto">
         </div>
       </div>
     </div>
@@ -71,12 +78,11 @@
   </div>
 
   <!-- Recent Searches template -->
-  <template id="recentSearchesTemplate">
+  <template id="busStopTemplate">
     <div class="bus py-2" style="width:auto">
       <a class="busID" href="eachStop.html" style="cursor: pointer">
         <div class="container bg-light py-4 bus-body">
-          <h5 class="recentSearch-number">Bus Number</h5>
-          <h5 class="recentSearch-details">Details</h5>
+          <h5 class="busName">Bus Stop Name</h5>
         </div>
       </a>
     </div>
