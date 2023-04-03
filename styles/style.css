@@ -8,9 +8,14 @@
 }
 
 .navbar-light .navbar-brand {
-  /*background-color: #1B98E0;                /* some secondary colour */
+  background-color: #1B98E0;                /* some secondary colour */
   border-color: #1B98E0;                    /* some accent colour */
   border-width: thick
+}
+
+.container.py-4 {
+  height: auto;
+  overflow: scroll;
 }
 
 body {
@@ -21,9 +26,9 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: 10% 80% 10%;
   grid-template-areas: 
-      "nav"
-      "container py-4"
-      "footer";
+    "nav"
+    "container py-4"
+    "footer";
 }
 
 #picture {

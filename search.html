@@ -35,7 +35,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Link to styles of your own -->
-  <link rel="stylesheet" href="./styles/style.css" />
+  <link rel="stylesheet" href="./styles/style.css"/>
 </head>
 
 <body>
@@ -53,16 +53,19 @@
         Search
       </button>
     </form>
+
     <!-- Show recent searches -->
-    <div>
+    <div class="container"> Recent searches
       <div class="container">
         <div id="Recent Searches-go-here" class="col col-auto">
         </div>
       </div>
     </div>
     <!-- Show bus lines -->
-    <div class="container">
-      <div id="Bus Lines-go-here" class="col col-auto">
+    <div class="container"> Bus stops
+      <div class="container">
+        <div id="Bus Lines-go-here" class="col col-auto">
+        </div>
       </div>
     </div>
   </div>
@@ -70,14 +73,15 @@
   <!-- Recent Searches template -->
   <template id="recentSearchesTemplate">
     <div class="bus py-2" style="width:auto">
-      <a href="eachStop.html" style="cursor: pointer">
+      <a class="busID" href="eachStop.html" style="cursor: pointer">
         <div class="container bg-light py-4 bus-body">
-          <h5 class="bus-number">Bus Number</h5>
-          <h5 class="bus-details">Details</h5>
+          <h5 class="recentSearch-number">Bus Number</h5>
+          <h5 class="recentSearch-details">Details</h5>
         </div>
       </a>
     </div>
   </template>
+
   <!-- Bus Line template -->
   <template id="busLineTemplate">
     <div class="bus py-2" style="width:auto">

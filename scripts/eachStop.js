@@ -1,23 +1,21 @@
 var currentUser;
 
 function loginOrNot() {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      //if user is logged in, currentUser is referenced from firebase
-      currentUser = db.collection("users").doc(user.uid);
-      //console.log(user.uid);
-    } else {
-      return false;
-    }
+  return new Promise(resolve => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        //if user is logged in, currentUser is referenced from firebase
+        resolve(currentUser = db.collection("users").doc(user.uid));
+      }
+    })
   })
 }
 loginOrNot();
 
 function playBusStopInformation() {
-  //retrieve the document id from the url
   let params = new URL(window.location.href); //get the url from the searbar
-  let docID = params.searchParams.get("docID");
-  console.log(docID);
+  let docID = params.searchParams.get("docID"); //retrieve the document id from it
+  //console.log(docID);
 
   db.collection("busStops").doc(docID).get()
     .then(thisBusStops => {
@@ -46,7 +44,7 @@ function playBusStopInformation() {
       document.getElementById('save-'+docID).onclick = () => toggleBookmark(docID);
 
       //if user is logged in, display their bookmarks correctly
-      if (!loginOrNot()) {
+      if (currentUser) {
         currentUser.get().then(userDoc => {
           var bookmarks = userDoc.data().bookmarks;
           if (bookmarks.includes(docID)) {
@@ -61,6 +59,7 @@ function playBusStopInformation() {
     .catch(error => {
       console.log(error); //debug statement
     });
+    addToRecentSearches(docID);
 }
 playBusStopInformation()
 
@@ -113,39 +112,24 @@ function populateNewsFeed() {
 }
 populateNewsFeed();
 
-//Bookmark 
+//Bookmark toggle
 function toggleBookmark(busDocId) {
   //console.log("Bookmark is running " + busDocId);
-  if (loginOrNot() == false) {
+  if (!currentUser) {
     alert("Please log in first to gain more access.")
   } else {
     currentUser.get().then(userDoc => {
-      var iconID = "save-" + busDocId;
-      //checks if user has a bookmark field already in their doc
-      if (userDoc.data().bookmarks !== undefined) {
-        //if yes, reference the bookmarks array from firebase onto bookmark  
-        var bookmark = userDoc.data().bookmarks;
-        //if bookmark has this bus stop already, remove it in firebase  
-        if (bookmark.includes(busDocId)) {           
-          currentUser.update({
-            bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
-          }).then(function () {
-              console.log("Bookmark removed for " + userDoc.data().name);
-              document.getElementById(iconID).innerText = 'bookmark_border';
-          });
-        //otherwise, add the bus stop in in firebase
-        } else {  
-          currentUser.set({
-            bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
-          }, {
-              merge: true
-          }).then(function () {
-              console.log("Bookmark added for " + userDoc.data().name);
-              document.getElementById(iconID).innerText = 'bookmark';
-          });
-        }
-      //if user does not have a bookmarks field in their doc on firebase,
-      //create one and add the bus stop in 
+      var iconID = "save-" + busDocId;      
+      var bookmark = userDoc.data().bookmarks;
+      //if user has the bus id on firebase already, remove it      
+      if (bookmark.includes(busDocId)) { 
+        currentUser.update({
+          bookmarks: firebase.firestore.FieldValue.arrayRemove(busDocId)
+        }).then(function () {
+            console.log("Bookmark removed for " + userDoc.data().name);
+            document.getElementById(iconID).innerText = 'bookmark_border';
+        });
+      //otherwise, add the bus id in in firebase
       } else { 
         currentUser.set({
           bookmarks: firebase.firestore.FieldValue.arrayUnion(busDocId)
@@ -157,5 +141,37 @@ function toggleBookmark(busDocId) {
         });
       }
     })
-  } 
+  }
+}
+
+function addToRecentSearches(busDocId) {
+  loginOrNot().then(currentUser => {
+    if (!currentUser) {
+      console.log("User is not logged in, can't add to recent search");
+    } else {  
+      currentUser.get().then(userDoc => {
+        //add the recently-searched bus stop in firebase  
+        currentUser.set({
+          recentSearches: firebase.firestore.FieldValue.arrayUnion(busDocId)
+        }, {
+          merge: true
+        }).then(function () {
+          console.log("Added to recent searches for " + userDoc.data().name);
+        })
+      }).then(() => {
+        currentUser.get().then(userDoc => {
+          var recentSearch = userDoc.data().recentSearches || [];
+          console.log(recentSearch.length + " recent searches");
+          //if more than 3 recent searches exist, remove the oldest one
+          if (recentSearch.length > 3) {
+            currentUser.update({
+              recentSearches: firebase.firestore.FieldValue.arrayRemove(recentSearch[0])
+            }).then(function () {
+              console.log("Removed oldest ID " + recentSearch[0]);
+            });
+          }
+        })
+      })  
+    }
+  }) 
 }

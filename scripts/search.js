@@ -1,3 +1,17 @@
+var currentUser;
+
+function loginOrNot() {
+  return new Promise(resolve => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        //if user is logged in, currentUser is referenced from firebase
+        resolve(currentUser = db.collection("users").doc(user.uid));
+      }
+    })
+  })
+}
+loginOrNot();
+
 function writeBus() {
   //define a variable for the collection you want to create in Firestore to populate data
   var busRef = db.collection("Bus Lines");
@@ -35,7 +49,7 @@ function writeBus() {
 }
 
 function displayBusLines(collection) {
-  let busTemplate = document.getElementById("busLineTemplate");
+  //let busTemplate = document.getElementById("busLineTemplate");
 
   db.collection(collection).get()   //the collection called "hikes"
     .then(allBusLine => {
@@ -63,45 +77,28 @@ function displayBusLines(collection) {
 }
 displayBusLines("Bus Lines");
 
-function addToRecentSearch(busDocId) {
-  console.log("Added to recent searches!");
-  console.log(busDocId);
-  if (doAll() == 2) {
-    alert("Please log in first to gain more access.")
-  } else {  
-    currentUser.get().then(userDoc => {
-      //checks if user has a recentSearh field already in their doc
-      if (userDoc.data().recentSearch.exist) {
-        //if yes, reference the recentSearch array onto recentSearches
-        var recentSearches = userDoc.data().recentSearch;
-        //if recentSearches has this bus stop already, remove it
-        if (recentSearches.includes(busDocId)) {
-          currentUser.update({
-            recentSearch: firebase.firestore.FieldValue.arrayRemove(busDocId)
-          }).then(function () {
-              console.log("Recent search removed for: " + currentUser);
-          });
-        //otherwise, add it in
-        } else {  
-          currentUser.set({
-            recentSearch: firebase.firestore.FieldValue.arrayUnion(busDocId)
-          }, {
-              merge: true
-          }).then(function () {
-              console.log("Recent search added for: " + currentUser);
-          });
-        }
-      //if user does not have a recentSearch field in their doc,
-      //create one and add the recent search in  
-      } else {
-        currentUser.set({
-          recentSearch: firebase.firestore.FieldValue.arrayUnion(busDocId)
-        }, {
-            merge: true
-        }).then(function () {
-            console.log("Recent search added for: " + currentUser);
-        });
-      }
-    })
-  } 
+function displayRecentSearches() {
+  loginOrNot().then(currentUser => {
+    if (currentUser) {
+      currentUser.get().then(userDoc => {
+        var recentSearch = userDoc.data().recentSearches;
+
+        recentSearch.forEach(busID => {
+          //console.log(busID);
+          db.collection("busStops").doc(busID).get().then(thisRecentSearch => {
+            description = thisRecentSearch.data().name;
+
+            let newcard = recentSearchesTemplate.content.cloneNode(true);
+            newcard.querySelector('.recentSearch-number').innerHTML = description;
+            newcard.querySelector('.busID').href += "?docID=" + busID;
+
+            document.getElementById("Recent Searches-go-here").appendChild(newcard);
+          })
+        })
+      })
+    } else {
+      console.log("User hasn't logged in, can't display recent searches");
+    }  
+  }) 
 }
+displayRecentSearches();
