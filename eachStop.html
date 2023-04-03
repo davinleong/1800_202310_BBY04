@@ -50,7 +50,7 @@
 
   <!-- the body of your page goes here -->
   <!-- stuff -->
-  <div class="container">
+  <div class="container1" style="padding:10%">
     <h1><span id="busStopsName">this stop</span></h1>
     <div class="position-relative">
       <img class="bus-img" src="" alt="Bus Stop photo">
@@ -60,33 +60,36 @@
     </div>
   </div>
 
-  <div class="container">
-    <h2>News Feed</h2>
-    <div id="posts-go-here"></div>
-    <!-- Here is container for cards  -->
+  <div style="padding-left:10%; padding-right:10%">
+  <div class="container2">
     <div class="container">
-      <div id="newsFeedCardGroup" class="row row-cols-auto">
+      <h2>News Feed</h2>
+      <div id="posts-go-here"></div>
+      <!-- Here is container for cards  -->
+      <div class="container">
+        <div id="newsFeedCardGroup" class="row row-cols-auto">
+        </div>
       </div>
     </div>
-  </div>
 
-  <template id="newsFeedCardTemplate">
-    <div class="card bg-secondary">
-      <div class="card-body bg-light">
-        <img class="card-image card-img-top" src=" ..." alt="...">
-        <h5 class="title">placeholder</h5>
-        <p class="description">placeholder</p>
-        <p class="time">placeholder</p>
-        <p class="condition">placeholder</p> 
-        <p class="flooded">placeholder</p> 
-        <p class="heavySnow">placeholder</p> 
-        <p class="heat">placeholder</p>    
-        <br>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
-        </p>
+    <template id="newsFeedCardTemplate">
+      <div class="card bg-secondary">
+        <div class="card-body bg-light">
+          <img class="card-image card-img-top" src=" ..." alt="..." style="width: 20rem;">
+          <h5 class="title">placeholder</h5>
+          <p class="description">placeholder</p>
+          <p class="time">placeholder</p>
+          <p class="condition">placeholder</p> 
+          <p class="flooded">placeholder</p> 
+          <p class="heavySnow">placeholder</p> 
+          <p class="heat">placeholder</p>    
+          <br>
+          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+          </p>
+        </div>
       </div>
-    </div>
-  </template>
+    </template>
+  </div> 
 
   <!-- our own footer goes here-->
   <nav id="footerPlaceholder"></nav>
