@@ -49,20 +49,18 @@
   <nav id="navbarPlaceholder"></nav>
 
   <!-- the body of your page goes here -->
-  <!-- stuff -->
-  <div class="container1" style="padding:10%">
-    <h1><span id="busStopsName">this stop</span></h1>
-    <i class="material-icons" id="bookmark">bookmark_border</i>
+  <div class="container1">
     <div class="position-relative">
+      <h1 style="text-align: center"><span id="busStopsName">this stop</span></h1>
       <img class="bus-img" src="" alt="Bus Stop photo">
+      <i class="material-icons" id="bookmark">bookmark_border</i>
+      <button class="btn btn-primary position bottom-0 end-0 m-3"
+        onclick="saveBusDocumentIDAndRedirect()">Post</button>
     </div>
   </div>
 
-  <div style="padding-left:10%; padding-right:10%">
   <div class="container2">
     <div class="container">
-      <button class="btn btn-primary position bottom-0 end-0 m-3"
-      onclick="saveBusDocumentIDAndRedirect()">Post</button>
       <h2>News Feed</h2>
       <div id="posts-go-here"></div>
       <!-- Here is container for cards  -->
@@ -75,7 +73,7 @@
     <template id="newsFeedCardTemplate">
       <div class="card bg-secondary">
         <div class="card-body bg-light">
-          <img class="card-image card-img-top" src=" ..." alt="..." style="width: 20rem;">
+          <img class="card-image card-img-top" src=" ..." alt="...">
           <h5 class="title">placeholder</h5>
           <p class="description">placeholder</p>
           <p class="time">placeholder</p>
@@ -90,9 +88,6 @@
       </div>
     </template>
   </div> 
-  </div>
-</body>
-
 
   <!-- our own footer goes here-->
   <nav id="footerPlaceholder"></nav>
@@ -104,8 +99,6 @@
   <script src="./scripts/skeleton.js"></script>
   <script src="./scripts/eachStop.js"></script>
   <script src="./scripts/main.js"></script>
-
-
-
+</body>
 
 </html>
