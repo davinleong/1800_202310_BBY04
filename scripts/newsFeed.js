@@ -105,7 +105,7 @@ function uploadPic(postDocID) {
                           // save this postID into an array for the OWNER
                           // so we can show "my posts" in the future
                           savePostIDforUser(postDocID);
-                          window.location.href = "newsFeed.html?busDocID=" + busDocID
+                          window.location.href = "eachStop.html?docID=" + busDocID
                       })
               })
       })
