@@ -106,33 +106,24 @@ function displayRecentSearches() {
 displayRecentSearches();
 
 //when searched for a street, return any bus stop associated with that street
-function displaySearchedBusStop() {
+function displaySearchedBusStop() {   
   let searchValue = document.getElementById("searchValue").value;
-  console.log(searchValue);
+  console.log("Hi " + searchValue);
 
-  const collectionRef = firebase.firestore().collection("busStops");
+  var busStopRef = firebase.firestore().collection("busStops");
 
-  const busDoc = collectionRef.where(searchValue, "==", searchValue);
-
-  busDoc.get().then((querySnapshot) => {
+  var busDoc = busStopRef.where("name", ">=", searchValue).where("name", "<=", searchValue + "\uf8ff");
+  busDoc.get().then(function(querySnapshot) {
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-      //console.log("Hi");
-    })
-  })
+      console.log(doc.id);
 
-  /*db.collection("busStops").doc().forEach(doc => {
-    doc.where(searchValue, "==", searchValue).get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, '=>', doc.data());
+      db.collection("busStops").doc(doc.id).get().then(thisSearched => {
+        let newcard = busStopTemplate.content.cloneNode(true);
+        newcard.querySelector('.busName').innerHTML = doc.data().name;
+        newcard.querySelector('.busID').href += "?docID=" + doc.id;
 
-        db.collection("busStops").doc(doc.id);
-          let newcard = busStopTemplate.content.cloneNode(true);
-          newcard.querySelector('.busName').innerHTML = searchValue;
-          newcard.querySelector('.busID').href += "?docID=" + busID;
-
-          document.getElementById("searched-go-here").appendChild(newcard);
+        document.getElementById("searched-go-here").appendChild(newcard);    
       })
     })
-  }) */
+  })
 }
