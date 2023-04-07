@@ -30,9 +30,7 @@ function showMap() {
           allEvents.forEach(doc => {
             lat = doc.data().lat;
             lng = doc.data().lng;
-            console.log(lat, lng);
             coordinates = [lng, lat];
-            console.log(coordinates);
             // Coordinates
             event_name = doc.data().name; // Event Name
             preview = doc.data().details; // Text Preview
