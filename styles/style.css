@@ -2,10 +2,8 @@
   background-color: #1B98E0;     /* some secondary colour */
 }
 
-.navbar-light .navbar-brand {
-  background-color: #1B98E0;                /* some secondary colour */
-  border-color: #1B98E0;                    /* some accent colour */
-  border-width: thick
+.navbar-brand {
+  color:aquamarine;
 }
 
 .container.py-4 {
@@ -44,9 +42,6 @@ a:visited {
 a:active {
   color:aquamarine;
 }
-.dropdown-item {
-  color:aquamarine;
-}
 
 .bus-body {
   border-radius:10px;
@@ -58,5 +53,6 @@ a:active {
 }
 
 .material-icons {
+  color: aquamarine;
   cursor: pointer;
 }
