@@ -1,5 +1,5 @@
 function writeBus130() {
-    //define a variable for the collection you want to create in Firestore to populate data
+    //define a variable for the collection 130 to create in firebase.
     var busRef = db.collection("130");
   
     busRef.add({
@@ -84,7 +84,7 @@ function writeBus130() {
   
     db.collection(collection).get()   //the collection called "busStops"
       .then(allBusStop => {
-        //var i = 1;  //Optional: if you want to have a unique ID for each bus stop
+
         allBusStop.forEach(doc => { //iterate thru each doc
           var description = doc.data().description;    //get unique ID to each bus stop to be used for fetching right image
           let newcard = busStopTemplate.content.cloneNode(true);
@@ -92,15 +92,9 @@ function writeBus130() {
           //update title and text and image
           newcard.querySelector('.bus-stop-details').innerHTML = description;
   
-          //Optional: give unique ids to all elements for future use
-          // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-          // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-          // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-  
           //attach to gallery, Example: "buses-go-here"
           document.getElementById(collection + "-go-here").appendChild(newcard);
   
-          //i++;   //Optional: iterate variable to serve as unique ID
         })
       })
   }

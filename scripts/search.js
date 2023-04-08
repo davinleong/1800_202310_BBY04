@@ -1,5 +1,7 @@
 var currentUser;
 
+// A function that returns a Promise to check if a user is logged in and 
+// resolve with the reference to their document.
 function loginOrNot() {
   return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(user => {
@@ -13,79 +15,74 @@ function loginOrNot() {
 loginOrNot();
 
 function writeBus() {
-  //define a variable for the collection you want to create in Firestore to populate data
+  //define a variable for the collection "Bus Lines" to create in Firestore to populate data
   var busRef = db.collection("Bus Lines");
 
   busRef.add({
     number: "130",
-    description: "Metrotown Station / Kootenay Loop", //replace with your own city?
+    description: "Metrotown Station / Kootenay Loop", 
     city: "Burnaby",
     province: "BC",
   });
   busRef.add({
     number: "222",
-    description: "Metrotown Station / Phibbs Exchange", //replace with your own city?
+    description: "Metrotown Station / Phibbs Exchange", 
     city: "Burnaby",
     province: "BC",
   });
   busRef.add({
     number: "144",
-    description: "Metrotown Station / SFU Transit Exchange", //replace with your own city?
+    description: "Metrotown Station / SFU Transit Exchange", 
     city: "Burnaby",
     province: "BC",
   });
   busRef.add({
     number: "25",
-    description: "Brentwood Station / UBC Exchange", //replace with your own city?
+    description: "Brentwood Station / UBC Exchange", 
     city: "Burnaby",
     province: "BC",
   });
   busRef.add({
     number: "430",
-    description: "Metrotown Station / Eastbound Cook Rd", //replace with your own city?
+    description: "Metrotown Station / Eastbound Cook Rd", 
     city: "Burnaby",
     province: "BC",
   });
 }
 
+// A function to display bus lines in the HTML page
 function displayBusLines(collection) {
-  //let busTemplate = document.getElementById("busLineTemplate");
 
-  db.collection(collection).get()   //the collection called "hikes"
+  db.collection(collection).get()   //the collection called "Bus Lines"
     .then(allBusLine => {
-      //var i = 1;  //Optional: if you want to have a unique ID for each hike
+      
       allBusLine.forEach(doc => { //iterate thru each doc
-        var number = doc.data().number;       // get value of the "name" key
-        var description = doc.data().description;    //get unique ID to each hike to be used for fetching right image
+        var number = doc.data().number;       // get value of the "number" key
+        var description = doc.data().description;    //get unique ID to each busLine to be used for fetching right description
         let newcard = busLineTemplate.content.cloneNode(true);
 
         //update title and text and image
         newcard.querySelector('.bus-number').innerHTML = number;
         newcard.querySelector('.bus-details').innerHTML = description;
 
-        //Optional: give unique ids to all elements for future use
-        // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-        // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-        // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-
-        //attach to gallery, Example: "hikes-go-here"
+        //attach to gallery, Example: "Bus Lines-go-here"
         document.getElementById(collection + "-go-here").appendChild(newcard);
-
-        //i++;   //Optional: iterate variable to serve as unique ID
       })
     })
 }
+// Call the displayBusLines function to display the bus lines
 displayBusLines("Bus Lines");
 
+// A function to display recent searches made by the user
 function displayRecentSearches() {
-  loginOrNot().then(currentUser => {
+  // Check if a user is logged in, and if so, 
+  //get their recent searches and display them in the HTML page
+  loginOrNot().then(currentUser => { 
     if (currentUser) {
-      //document.getElementById("abc").innerHTML = "Recent Searches";
       currentUser.get().then(userDoc => {
         var recentSearch = userDoc.data().recentSearches;
 
         recentSearch.forEach(busID => {
-          //console.log(busID);
           db.collection("busStops").doc(busID).get().then(thisRecentSearch => {
             description = thisRecentSearch.data().name;
             console.log(description);

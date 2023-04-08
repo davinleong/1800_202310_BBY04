@@ -15,7 +15,6 @@ loginOrNot();
 function playBusStopInformation() {
   let params = new URL(window.location.href); //get the url from the searbar
   let docID = params.searchParams.get("docID"); //retrieve the document id from it
-  //console.log(docID);
 
   db.collection("busStops").doc(docID).get()
     .then(thisBusStops => {
@@ -114,7 +113,6 @@ populateNewsFeed();
 
 //Bookmark toggle
 function toggleBookmark(busDocId) {
-  //console.log("Bookmark is running " + busDocId);
   if (!currentUser) {
     alert("Please log in first to gain more access.")
   } else {

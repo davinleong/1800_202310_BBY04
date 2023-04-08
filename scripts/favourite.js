@@ -1,5 +1,5 @@
 function writeBusStops() {
-    //define a variable for the collection you want to create in Firestore to populate data
+    //define a variable for the collection busStops to create in Firestore to populate data
     var busRef = db.collection("busStops");
 
     busRef.add({
@@ -11,8 +11,7 @@ function writeBusStops() {
         lng: "-123.185234",
         name: "Dunbar Loop @ Bay 6", 
         province: "BC",
-        schedule: "Every 5min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
+        schedule: "Every 5min", 
     });
     busRef.add({
         city: "Vancouver",
@@ -24,7 +23,6 @@ function writeBusStops() {
         name: "UBC Exchange @ Bay 10", 
         province: "BC",
         schedule: "Every 15min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Vancouver",
@@ -36,7 +34,6 @@ function writeBusStops() {
         name: "Westbound Canada Way @ Sperling Ave", 
         province: "BC",
         schedule: "Every 30min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Vancouver",
@@ -48,7 +45,6 @@ function writeBusStops() {
         name: "Eastbound W Pender St @ Nicola St", 
         province: "BC",
         schedule: "Every 5min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Burnaby",
@@ -60,7 +56,6 @@ function writeBusStops() {
         name: "Metrotown Station @ Bay", 
         province: "BC",
         schedule: "Every 9min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Burnaby",
@@ -72,7 +67,6 @@ function writeBusStops() {
         name: "Eastbound Lougheed Hwy @ Boundary Rd", 
         province: "BC",
         schedule: "Every 7min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Burnaby",
@@ -84,7 +78,6 @@ function writeBusStops() {
         name: "Westbound Deer Lake Parkway @ Garden Grove Dr", 
         province: "BC",
         schedule: "Every 45min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Coquitlam",
@@ -96,7 +89,6 @@ function writeBusStops() {
         name: "Westbound Como Lake Ave @ 2500 Block", 
         province: "BC",
         schedule: "Every 5min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "North Vancouver",
@@ -108,7 +100,6 @@ function writeBusStops() {
         name: "Southbound Plymouth Dr @ McCartney Close", 
         province: "BC",
         schedule: "Every 5min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
     });
     busRef.add({
         city: "Port Moody",
@@ -119,8 +110,7 @@ function writeBusStops() {
         lng: "-122.865033",
         name: "Eastbound Ioco Rd @ Alderside Rd", 
         province: "BC",
-        schedule: "Every 5min",
-         //last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time 
+        schedule: "Every 5min", 
     });
 
 }
@@ -175,8 +165,7 @@ function getBookmarks(user) {
                     //update title and some pertinant information
                     newcard.querySelector('.card-title').innerHTML = title;
                     newcard.querySelector('.card-length').innerHTML = busSchedule;
-                    //newcard.querySelector('.card-text').innerHTML = details;
-                    newcard.querySelector('.card-image').src = `./images/${busCode}.jpg`; //Example: NV01.jpg
+                    newcard.querySelector('.card-image').src = `./images/${busCode}.jpg`; //Example: 50298.jpg
                     newcard.querySelector('a').href = "eachStop.html?docID=" + docID;
 
                     //NEW LINE: update to display length, duration, last updated
