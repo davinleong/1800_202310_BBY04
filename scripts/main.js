@@ -9,9 +9,9 @@ function insertNameFromFireStore() {
   firebase.auth().onAuthStateChanged(user => {
       // Check if a user is signed in:
       if (user) {
-          // Display user's name for the currently logged-in user here: 
-          $("#name-goes-here").text(user_Name); //using jquery
-
+        user_Name = user.displayName;
+        // Display user's name for the currently logged-in user here: 
+        $("#name-goes-here").text(user_Name); //using jquery
       } else {
           // No user is signed in.
       }
